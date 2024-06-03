@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro Clock</title>
+    <style>
+      .mainDiv {
+        padding: 30px;
+      }
+
+      .pomodoroClock {
+        border: 2px solid white;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        text-align: center;
+        height: 500px;
+        width: 500px;
+        border-radius: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: white;
+      }
+
+      .timer {
+        margin-top: 40%;
+        margin-bottom: 40%;
+      }
+
+      .minutes {
+        display: inline;
+        font-size: 100px;
+      }
+
+      .colon {
+        display: inline;
+        font-size: 100px;
+      }
+
+      .seconds {
+        display: inline;
+        font-size: 100px;
+      }
+
+      .clockBtns {
+        text-align: center;
+        padding: 20px;
+      }
+
+      .startBtn {
+        border: 1px solid white;
+        text-align: center;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        min-width: 5%;
+        height: auto;
+        border-radius: 5px;
+        font-family: monospace;
+        font-weight: bold;
+        letter-spacing: 1px;
+        background-color: white;
+        margin-right: 5px;
+        font-size: 30px;
+      }
+
+      .startBtn:hover {
+        cursor: pointer;
+      }
+
+      .restartBtn {
+        border: 1px solid white;
+        text-align: center;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        min-width: 5%;
+        height: auto;
+        border-radius: 5px;
+        font-family: monospace;
+        font-weight: bold;
+        letter-spacing: 1px;
+        background-color: white;
+        margin-right: 5px;
+        font-size: 30px;
+      }
+
+      .restartBtn:hover {
+        cursor: pointer;
+      }
+
+      .stopBtn {
+        border: 1px solid white;
+        text-align: center;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        min-width: 5%;
+        height: auto;
+        border-radius: 5px;
+        font-family: monospace;
+        font-weight: bold;
+        letter-spacing: 1px;
+        background-color: white;
+        font-size: 30px;
+      }
+
+      .stopBtn:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="mainDiv">
+      <div class="pomodoroClock" id="pomodoroClock">
+        <div class="timer">
+          <p class="minutes" id="minutes">25</p>
+          <p class="colon" id="colon">:</p>
+          <p class="seconds" id="seconds">00</p>
+        </div>
+      </div>
+      <div class="clockBtns" id="clockBtns">
+        <button type="button" class="startBtn" id="startBtn">START</button>
+        <button type="button" class="restartBtn" id="restartBtn">
+          RESTART
+        </button>
+        <button type="button" class="stopBtn" id="stopBtn">STOP</button>
+      </div>
+    </div>
+
+    <script>
+      Notification.requestPermission();
+      let breakCounts = 0;
+      let minutes = 25;
+      let seconds = 60;
+      let breakTime = 5;
+      let longBreak = 15;
+      document.getElementById("startBtn").addEventListener("click", () => {
+        new Notification("lets start the work");
+        minutes = 25;
+        minutes = minutes - 1;
+        document.getElementById("minutes").innerHTML = minutes;
+        document.getElementById("seconds").innerHTML = seconds;
+        setInterval(reamaingTime, 1000);
+      });
+
+      document.getElementById("restartBtn").addEventListener("click", () => {
+        location.reload();
+      });
+
+      document.getElementById("stopBtn").addEventListener("click", () => {
+        console.log("stop button cliked");
+      });
+      let reamaingTime = () => {
+        seconds = seconds - 1;
+        document.getElementById("seconds").innerHTML = seconds;
+        if (seconds === 0) {
+          minutes = minutes - 1;
+          if (minutes < 0) {
+            breakTime = breakTime - 1;
+            if (breakTime < 0) {
+              if (breakCounts === 3) {
+                breakCounts = 0;
+                document.getElementById("minutes").innerHTML = longBreak;
+              } else {
+                breakTime = 5;
+                minutes = 25;
+                breakCounts++;
+                console.log(breakCounts);
+                document.getElementById("minutes").innerHTML = minutes - 1;
+              }
+            } else {
+              document.getElementById("minutes").innerHTML = breakTime;
+            }
+          } else {
+            document.getElementById("minutes").innerHTML = minutes;
+          }
+          seconds = 60;
+          document.getElementById("seconds").innerHTML = seconds;
+        }
+      };
+    </script>
+  </body>
+</html>
