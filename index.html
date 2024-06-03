@@ -13,8 +13,8 @@
         border: 2px solid white;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         text-align: center;
-        height: 500px;
-        width: 500px;
+        height: 350px;
+        width: 350px;
         border-radius: 50%;
         margin-left: auto;
         margin-right: auto;
@@ -28,22 +28,22 @@
 
       .minutes {
         display: inline;
-        font-size: 100px;
+        font-size: 600%;
       }
 
       .colon {
         display: inline;
-        font-size: 100px;
+        font-size: 600%;
       }
 
       .seconds {
         display: inline;
-        font-size: 100px;
+        font-size: 600%;
       }
 
       .clockBtns {
         text-align: center;
-        padding: 20px;
+        padding: 20px;  
       }
 
       .startBtn {
@@ -59,6 +59,7 @@
         background-color: white;
         margin-right: 5px;
         font-size: 30px;
+        margin-bottom: 20px;
       }
 
       .startBtn:hover {
@@ -78,6 +79,7 @@
         background-color: white;
         margin-right: 5px;
         font-size: 30px;
+        margin-bottom: 20px;
       }
 
       .restartBtn:hover {
@@ -96,11 +98,14 @@
         letter-spacing: 1px;
         background-color: white;
         font-size: 30px;
+        margin-bottom: 20px;
       }
 
       .stopBtn:hover {
         cursor: pointer;
       }
+
+
     </style>
   </head>
 
@@ -114,10 +119,10 @@
         </div>
       </div>
       <div class="clockBtns" id="clockBtns">
-        <button type="button" class="startBtn" id="startBtn">START</button>
+        <button type="button" class="startBtn" id="startBtn">START</button><br>
         <button type="button" class="restartBtn" id="restartBtn">
           RESTART
-        </button>
+        </button><br>
         <button type="button" class="stopBtn" id="stopBtn">STOP</button>
       </div>
     </div>
