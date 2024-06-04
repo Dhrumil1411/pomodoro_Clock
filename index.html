@@ -193,10 +193,9 @@
     </div>
 
     <script>
-      try{
+      try {
         Notification.requestPermission();
-      }
-      catch(err){
+      } catch (err) {
         console.log(err.message);
       }
       let Timer;
@@ -220,7 +219,7 @@
         minutes = 4;
         shortBreak = -1;
         seconds = 59;
-        shortBreakNotification=true;
+        shortBreakNotification = true;
       });
 
       document.getElementById("longBreakBtn").addEventListener("click", () => {
@@ -233,35 +232,31 @@
         seconds = 59;
       });
 
+      let breakCounts = 0;
+      let minutes = 24;
+      let seconds = 59;
+      let shortBreak = 4;
+      let longBreak = 14;
       document.getElementById("startBtn").addEventListener("click", () => {
         if (
           document.getElementById("startBtn").innerHTML ===
           "\u23F5" + "START"
         ) {
-          startClock();
           new Notification("clock has started");
+          Timer = setInterval(reamaingTime, 1000);
+          document.getElementById("startBtn").innerHTML = "\u23F8" + "PAUSE";
+          if (minutes < 10) {
+            document.getElementById("minutes").innerHTML = "0" + minutes;
+          } else {
+            document.getElementById("minutes").innerHTML = minutes;
+          }
+          document.getElementById("seconds").innerHTML = seconds;
         } else {
           clearInterval(Timer);
           document.getElementById("startBtn").innerHTML = "\u23F5" + "START";
           new Notification("clock has paused");
         }
       });
-
-      let breakCounts = 0;
-      let minutes = 24;
-      let seconds = 59;
-      let shortBreak = 4;
-      let longBreak = 14;
-      function startClock() {
-        Timer = setInterval(reamaingTime, 1000);
-        document.getElementById("startBtn").innerHTML = "\u23F8" + "PAUSE";
-        if (minutes < 10) {
-          document.getElementById("minutes").innerHTML = "0" + minutes;
-        } else {
-          document.getElementById("minutes").innerHTML = minutes;
-        }
-        document.getElementById("seconds").innerHTML = seconds;
-      }
 
       function reamaingTime() {
         seconds = seconds - 1;
@@ -282,7 +277,7 @@
               } else {
                 if (longBreakNotification === false) {
                   new Notification("Long break has started take a break");
-                  longBreakNotification=true;
+                  longBreakNotification = true;
                 }
                 document.getElementById("minutes").innerHTML = longBreak;
                 longBreak = longBreak - 1;
