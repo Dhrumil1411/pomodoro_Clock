@@ -194,13 +194,13 @@
         }
       });
 
-      let breakCounts = 3;
+      let breakCounts = 0;
       let minutes = 24;
       let seconds = 59;
       let shortBreak = 4;
       let longBreak = 14;
       function startClock() {
-        Timer = setInterval(reamaingTime, 10);
+        Timer = setInterval(reamaingTime, 1000);
         new Notification("Lets get back to work!");
         document.getElementById("startBtn").innerHTML = "PAUSE";
         if (minutes < 10) {
@@ -224,14 +224,14 @@
             if (breakCounts === 3) {
               if (longBreak < 0) {
                 breakCounts = 0;
-                shortBreak=-1;
+                shortBreak = -1;
+                longBreak=14;
               } else {
                 console.log("in long break");
                 document.getElementById("minutes").innerHTML = longBreak;
                 longBreak = longBreak - 1;
               }
             } else {
-              console.log("in short break");
               if (shortBreak < 0) {
                 new Notification("break is over now lets get back to work!");
                 shortBreak = 5;
