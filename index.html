@@ -189,15 +189,11 @@
       <div class="clockBtns" id="clockBtns">
         <button type="button" class="startBtn" id="startBtn">START</button
         ><br />
+        <button type="button" id="allowNotification">allow notification</button>
       </div>
     </div>
 
     <script>
-      try {
-        Notification.requestPermission();
-      } catch (err) {
-        console.log(err.message);
-      }
       let Timer;
       let shortBreakNotification = false;
       let longBreakNotification = false;
@@ -231,13 +227,18 @@
         shortBreak = -1;
         seconds = 59;
       });
-
+      document.getElementById("allowNotification").addEventListener('click',()=>{
+        Notification.requestPermission().then(Permission=>{
+          console.log(Permission);
+        });
+      })
       let breakCounts = 0;
       let minutes = 24;
       let seconds = 59;
       let shortBreak = 4;
       let longBreak = 14;
       document.getElementById("startBtn").addEventListener("click", () => {
+
         if (
           document.getElementById("startBtn").innerHTML ===
           "\u23F5" + "START"
