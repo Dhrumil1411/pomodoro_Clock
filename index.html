@@ -7,83 +7,98 @@
     <title>Pomodoro Clock</title>
     <style>
       .mainDiv {
-        padding: 30px;
+        padding-top: 100px;
       }
 
       .clockTypes {
         text-align: center;
+        padding-top: 70px;
       }
 
       .pomodoroBtn {
-        border: 1px solid white;
+        border: 2px solid white;
         text-align: center;
-        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        box-shadow: 0 0 50px rgb(0 0 0/ 0.2);
         min-width: 5%;
         height: auto;
         border-radius: 5px;
         font-family: monospace;
         font-weight: bold;
         letter-spacing: 1px;
-        background-color: white;
         margin-right: 5px;
-        font-size: 25px;
+        font-size: 35px;
         margin-top: 10px;
+        transition-duration: 0.5s;
+        padding: 10px;
       }
 
       .pomodoroBtn:hover {
         cursor: pointer;
+        box-shadow: 0 0 50px  rgba(0, 0, 0, 0.24),
+          0 0 50px rgba(0, 0, 0, 0.19);
       }
 
       .shortBreakBtn {
-        border: 1px solid white;
+        border: 2px solid white;
         text-align: center;
-        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        box-shadow: 0 0 50px rgb(0 0 0/ 0.2);
         min-width: 5%;
         height: auto;
         border-radius: 5px;
         font-family: monospace;
         font-weight: bold;
         letter-spacing: 1px;
-        background-color: white;
         margin-right: 5px;
-        font-size: 25px;
+        font-size: 35px;
         margin-top: 10px;
+        transition-duration: 0.5s;
+        padding: 10px;
       }
 
       .shortBreakBtn:hover {
         cursor: pointer;
+        box-shadow: 0 0 50px  rgba(0, 0, 0, 0.24),
+          0 0 50px rgba(0, 0, 0, 0.19);
       }
 
       .longBreakBtn {
-        border: 1px solid white;
+        border: 2px solid white;
         text-align: center;
-        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        box-shadow: 0 0 50px rgb(0 0 0/ 0.2);
         min-width: 5%;
         height: auto;
         border-radius: 5px;
         font-family: monospace;
         font-weight: bold;
         letter-spacing: 1px;
-        background-color: white;
         margin-right: 5px;
-        font-size: 25px;
+        font-size: 35px;
         margin-top: 10px;
+        transition-duration: 0.5s;
+        padding: 10px;
       }
 
       .longBreakBtn:hover {
         cursor: pointer;
+        box-shadow: 0 0 50px  rgba(0, 0, 0, 0.24),
+          0 0 50px rgba(0, 0, 0, 0.19);
       }
 
       .pomodoroClock {
         border: 2px solid white;
-        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        box-shadow: 0 0 50px rgb(0 0 0/ 0.2);
         text-align: center;
-        height: 350px;
-        width: 350px;
+        height: 400px;
+        width: 400px;
         border-radius: 50%;
         margin-left: auto;
         margin-right: auto;
-        background-color: white;
+        transition-duration: 0.5s;
+      }
+
+      .pomodoroClock:hover {
+        box-shadow: 0 0 40px  rgba(0, 0, 0, 0.24),
+          0 0 40px rgba(0, 0, 0, 0.19);
       }
 
       .timer {
@@ -111,26 +126,29 @@
       }
 
       .startBtn {
-        border: 1px solid white;
+        border: 2px solid white;
         text-align: center;
-        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        box-shadow: 0 0 50px rgb(0 0 0/ 0.3);
         min-width: 5%;
         height: auto;
         border-radius: 5px;
         font-family: monospace;
         font-weight: bold;
         letter-spacing: 1px;
-        background-color: white;
         margin-right: 5px;
-        font-size: 25px;
-        margin-bottom: 20px;
+        font-size: 35px;
+        margin-top: 20px;
+        transition-duration: 0.5s;
+        padding: 10px;
       }
 
       .startBtn:hover {
         cursor: pointer;
+        box-shadow: 0 0 50px  rgba(0, 0, 0, 0.24),
+          0 0 50px rgba(0, 0, 0, 0.19);
       }
 
-      @media screen and (max-width: 510px) {
+      @media screen and (max-width: 700px) {
         .pomodoroBtn {
           font-size: 15px;
         }
@@ -238,7 +256,6 @@
       let shortBreak = 4;
       let longBreak = 14;
       document.getElementById("startBtn").addEventListener("click", () => {
-
         if (
           document.getElementById("startBtn").innerHTML ===
           "\u23F5" + "START"
