@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="stopwatch.png">
     <title>Pomodoro Clock</title>
     <style>
       .mainDiv {
@@ -83,8 +84,7 @@
       }
 
       .timer {
-        margin-top: 40%;
-        margin-bottom: 40%;
+        margin-top: 37%;
       }
 
       .minutes {
@@ -158,10 +158,11 @@
     <script>
       Notification.requestPermission();
       let Timer;
+      document.getElementById("startBtn").innerHTML = '\u23F5'+"START";
       document.getElementById("pomodoroBtn").addEventListener("click", () => {
         document.getElementById("minutes").innerHTML = "25";
         document.getElementById("seconds").innerHTML = "00";
-        document.getElementById("startBtn").innerHTML = "START";
+        document.getElementById("startBtn").innerHTML = '\u23F5'+"START";
         clearInterval(Timer);
         minutes = 24;
         seconds = 59;
@@ -170,27 +171,29 @@
       document.getElementById("shortBreakBtn").addEventListener("click", () => {
         document.getElementById("minutes").innerHTML = "05";
         document.getElementById("seconds").innerHTML = "00";
-        document.getElementById("startBtn").innerHTML = "START";
+        document.getElementById("startBtn").innerHTML ='\u23F5'+"START";
         clearInterval(Timer);
         minutes = 4;
+        shortBreak=-1;
         seconds = 59;
       });
 
       document.getElementById("longBreakBtn").addEventListener("click", () => {
         document.getElementById("minutes").innerHTML = "15";
         document.getElementById("seconds").innerHTML = "00";
-        document.getElementById("startBtn").innerHTML = "START";
+        document.getElementById("startBtn").innerHTML = '\u23F5'+"START";
         clearInterval(Timer);
         minutes = 14;
+        shortBreak=-1;
         seconds = 59;
       });
 
       document.getElementById("startBtn").addEventListener("click", () => {
-        if (document.getElementById("startBtn").innerHTML === "START") {
+        if (document.getElementById("startBtn").innerHTML === '\u23F5'+"START") {
           startClock();
         } else {
           clearInterval(Timer);
-          document.getElementById("startBtn").innerHTML = "START";
+          document.getElementById("startBtn").innerHTML = '\u23F5'+"START";
         }
       });
 
@@ -200,9 +203,8 @@
       let shortBreak = 4;
       let longBreak = 14;
       function startClock() {
-        Timer = setInterval(reamaingTime, 1000);
-        new Notification("Lets get back to work!");
-        document.getElementById("startBtn").innerHTML = "PAUSE";
+        Timer = setInterval(reamaingTime, 10);
+        document.getElementById("startBtn").innerHTML ='\u23F8'+"PAUSE";
         if (minutes < 10) {
           document.getElementById("minutes").innerHTML = "0" + minutes;
         } else {
@@ -234,7 +236,7 @@
             } else {
               if (shortBreak < 0) {
                 new Notification("break is over now lets get back to work!");
-                shortBreak = 5;
+                shortBreak = 4;
                 minutes = 24;
                 breakCounts++;
                 console.log(breakCounts);
