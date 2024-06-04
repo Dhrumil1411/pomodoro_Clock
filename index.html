@@ -193,7 +193,12 @@
     </div>
 
     <script>
-      Notification.requestPermission();
+      try{
+        Notification.requestPermission();
+      }
+      catch(err){
+        console.log(err.message);
+      }
       let Timer;
       let shortBreakNotification = false;
       let longBreakNotification = false;
