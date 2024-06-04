@@ -9,6 +9,67 @@
         padding: 30px;
       }
 
+      .clockTypes {
+        text-align: center;
+      }
+
+      .pomodoroBtn {
+        border: 1px solid white;
+        text-align: center;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        min-width: 5%;
+        height: auto;
+        border-radius: 5px;
+        font-family: monospace;
+        font-weight: bold;
+        letter-spacing: 1px;
+        background-color: white;
+        margin-right: 5px;
+        font-size: 25px;
+      }
+
+      .pomodoroBtn:hover {
+        cursor: pointer;
+      }
+
+      .shortBreakBtn {
+        border: 1px solid white;
+        text-align: center;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        min-width: 5%;
+        height: auto;
+        border-radius: 5px;
+        font-family: monospace;
+        font-weight: bold;
+        letter-spacing: 1px;
+        background-color: white;
+        margin-right: 5px;
+        font-size: 25px;
+      }
+
+      .shortBreakBtn:hover {
+        cursor: pointer;
+      }
+
+      .longBreakBtn {
+        border: 1px solid white;
+        text-align: center;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        min-width: 5%;
+        height: auto;
+        border-radius: 5px;
+        font-family: monospace;
+        font-weight: bold;
+        letter-spacing: 1px;
+        background-color: white;
+        margin-right: 5px;
+        font-size: 25px;
+      }
+
+      .longBreakBtn:hover {
+        cursor: pointer;
+      }
+
       .pomodoroClock {
         border: 2px solid white;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
@@ -43,7 +104,7 @@
 
       .clockBtns {
         text-align: center;
-        padding: 20px;  
+        padding: 20px;
       }
 
       .startBtn {
@@ -58,58 +119,28 @@
         letter-spacing: 1px;
         background-color: white;
         margin-right: 5px;
-        font-size: 30px;
+        font-size: 25px;
         margin-bottom: 20px;
       }
 
       .startBtn:hover {
         cursor: pointer;
       }
-
-      .restartBtn {
-        border: 1px solid white;
-        text-align: center;
-        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-        min-width: 5%;
-        height: auto;
-        border-radius: 5px;
-        font-family: monospace;
-        font-weight: bold;
-        letter-spacing: 1px;
-        background-color: white;
-        margin-right: 5px;
-        font-size: 30px;
-        margin-bottom: 20px;
-      }
-
-      .restartBtn:hover {
-        cursor: pointer;
-      }
-
-      .stopBtn {
-        border: 1px solid white;
-        text-align: center;
-        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-        min-width: 5%;
-        height: auto;
-        border-radius: 5px;
-        font-family: monospace;
-        font-weight: bold;
-        letter-spacing: 1px;
-        background-color: white;
-        font-size: 30px;
-        margin-bottom: 20px;
-      }
-
-      .stopBtn:hover {
-        cursor: pointer;
-      }
-
-
     </style>
   </head>
 
   <body>
+    <div class="clockTypes" id="clockTypes">
+      <button type="button" class="pomodoroBtn" id="pomodoroBtn">
+        pomodoro
+      </button>
+      <button type="button" class="shortBreakBtn" id="shortBreakBtn">
+        Short Break
+      </button>
+      <button type="button" class="longBreakBtn" id="longBreakBtn">
+        long Break
+      </button>
+    </div>
     <div class="mainDiv">
       <div class="pomodoroClock" id="pomodoroClock">
         <div class="timer">
@@ -119,65 +150,111 @@
         </div>
       </div>
       <div class="clockBtns" id="clockBtns">
-        <button type="button" class="startBtn" id="startBtn">START</button><br>
-        <button type="button" class="restartBtn" id="restartBtn">
-          RESTART
-        </button><br>
-        <button type="button" class="stopBtn" id="stopBtn">STOP</button>
+        <button type="button" class="startBtn" id="startBtn">START</button
+        ><br />
       </div>
     </div>
 
     <script>
       Notification.requestPermission();
-      let breakCounts = 0;
-      let minutes = 25;
-      let seconds = 60;
-      let breakTime = 5;
-      let longBreak = 15;
+      let Timer;
+      document.getElementById("pomodoroBtn").addEventListener("click", () => {
+        document.getElementById("minutes").innerHTML = "25";
+        document.getElementById("seconds").innerHTML = "00";
+        document.getElementById("startBtn").innerHTML = "START";
+        clearInterval(Timer);
+        minutes = 24;
+        seconds = 59;
+      });
+
+      document.getElementById("shortBreakBtn").addEventListener("click", () => {
+        document.getElementById("minutes").innerHTML = "05";
+        document.getElementById("seconds").innerHTML = "00";
+        document.getElementById("startBtn").innerHTML = "START";
+        clearInterval(Timer);
+        minutes = 4;
+        seconds = 59;
+      });
+
+      document.getElementById("longBreakBtn").addEventListener("click", () => {
+        document.getElementById("minutes").innerHTML = "15";
+        document.getElementById("seconds").innerHTML = "00";
+        document.getElementById("startBtn").innerHTML = "START";
+        clearInterval(Timer);
+        minutes = 14;
+        seconds = 59;
+      });
+
       document.getElementById("startBtn").addEventListener("click", () => {
-        new Notification("lets start the work");
-        minutes = 25;
-        minutes = minutes - 1;
-        document.getElementById("minutes").innerHTML = minutes;
+        if (document.getElementById("startBtn").innerHTML === "START") {
+          startClock();
+        } else {
+          clearInterval(Timer);
+          document.getElementById("startBtn").innerHTML = "START";
+        }
+      });
+
+      let breakCounts = 3;
+      let minutes = 24;
+      let seconds = 59;
+      let shortBreak = 4;
+      let longBreak = 14;
+      function startClock() {
+        Timer = setInterval(reamaingTime, 10);
+        new Notification("Lets get back to work!");
+        document.getElementById("startBtn").innerHTML = "PAUSE";
+        if (minutes < 10) {
+          document.getElementById("minutes").innerHTML = "0" + minutes;
+        } else {
+          document.getElementById("minutes").innerHTML = minutes;
+        }
         document.getElementById("seconds").innerHTML = seconds;
-        setInterval(reamaingTime, 1000);
-      });
+      }
 
-      document.getElementById("restartBtn").addEventListener("click", () => {
-        location.reload();
-      });
-
-      document.getElementById("stopBtn").addEventListener("click", () => {
-        console.log("stop button cliked");
-      });
-      let reamaingTime = () => {
+      function reamaingTime() {
         seconds = seconds - 1;
-        document.getElementById("seconds").innerHTML = seconds;
+        if (seconds < 10) {
+          document.getElementById("seconds").innerHTML = "0" + seconds;
+        } else {
+          document.getElementById("seconds").innerHTML = seconds;
+        }
         if (seconds === 0) {
           minutes = minutes - 1;
           if (minutes < 0) {
-            breakTime = breakTime - 1;
-            if (breakTime < 0) {
-              if (breakCounts === 3) {
+            if (breakCounts === 3) {
+              if (longBreak < 0) {
                 breakCounts = 0;
-                document.getElementById("minutes").innerHTML = longBreak;
+                shortBreak=-1;
               } else {
-                breakTime = 5;
-                minutes = 25;
-                breakCounts++;
-                console.log(breakCounts);
-                document.getElementById("minutes").innerHTML = minutes - 1;
+                console.log("in long break");
+                document.getElementById("minutes").innerHTML = longBreak;
+                longBreak = longBreak - 1;
               }
             } else {
-              document.getElementById("minutes").innerHTML = breakTime;
+              console.log("in short break");
+              if (shortBreak < 0) {
+                new Notification("break is over now lets get back to work!");
+                shortBreak = 5;
+                minutes = 24;
+                breakCounts++;
+                console.log(breakCounts);
+                document.getElementById("minutes").innerHTML = minutes;
+              } else {
+                document.getElementById("minutes").innerHTML = shortBreak;
+                shortBreak = shortBreak - 1;
+              }
             }
           } else {
-            document.getElementById("minutes").innerHTML = minutes;
+            if (minutes < 10) {
+              document.getElementById("minutes").innerHTML = "0" + minutes;
+            } else {
+              document.getElementById("minutes").innerHTML = minutes;
+            }
           }
           seconds = 60;
-          document.getElementById("seconds").innerHTML = seconds;
+          document.getElementById("seconds").innerHTML = "60";
         }
-      };
+      }
     </script>
   </body>
 </html>
