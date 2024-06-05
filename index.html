@@ -101,7 +101,6 @@
       }
 
       .pomodoroClock {
-        border: 2px;
         box-shadow: 0 0 50px rgb(0 0 0/ 0.2);
         text-align: center;
         height: 400px;
@@ -122,6 +121,7 @@
 
       .timer {
         padding-top: 40%;
+
       }
 
       .minutes {
@@ -301,6 +301,7 @@
         document.getElementById("shortBreakBtn").className = "shortBreakBtn";
         document.getElementById("longBreakBtn").className = "longBreakBtn";
       }
+
       document.getElementById("pomodoroBtn").addEventListener("click", () => {
         document.body.style.backgroundColor = "rgb(80, 200, 120)";
         selectedClock = "pomodoro";
@@ -326,8 +327,8 @@
 
       document.getElementById("shortBreakBtn").addEventListener("click", () => {
         selectedClock = "shortBreak";
-        document.body.style.backgroundColor = "rgb(255, 49, 49)";
-        document.getElementById("startBtn").style.color = "rgb(255, 49, 49)";
+        document.body.style.backgroundColor = "rgb(236, 88, 0)";
+        document.getElementById("startBtn").style.color = "rgb(236, 88, 0)";
         if (screen.width < 700) {
           document.getElementById("pomodoroBtn").className = "pomodoroBtn";
           document.getElementById("shortBreakBtn").className =
@@ -339,6 +340,8 @@
             "selectedClockTypeForlargeDevice";
           document.getElementById("longBreakBtn").className = "longBreakBtn";
         }
+        document.getElementById("pomodoroClock").className = "pomodoroClock";
+        document.getElementById("startBtn").className = "startBtn";
         document.getElementById("minutes").innerHTML = "05";
         document.getElementById("seconds").innerHTML = "00";
         document.getElementById("startBtn").innerHTML = "START";
@@ -363,6 +366,8 @@
           document.getElementById("longBreakBtn").className =
             "selectedClockTypeForlargeDevice";
         }
+        document.getElementById("pomodoroClock").className = "pomodoroClock";
+        document.getElementById("startBtn").className = "startBtn";
         document.getElementById("minutes").innerHTML = "15";
         document.getElementById("seconds").innerHTML = "00";
         document.getElementById("startBtn").innerHTML = "START";
@@ -393,7 +398,7 @@
                 .getElementById("startBtn")
                 .setAttribute(
                   "style",
-                  "color:rgb(255, 49, 49); font-size:30px;"
+                  "color:rgb(236, 88, 0); font-size:30px;"
                 );
             } else {
               document
@@ -428,7 +433,7 @@
                 .getElementById("startBtn")
                 .setAttribute(
                   "style",
-                  "color:rgb(255, 49, 49); background-color: white; font-size:45px;"
+                  "color:rgb(236, 88, 0); background-color: white; font-size:45px;"
                 );
             } else {
               document
@@ -471,7 +476,7 @@
                 .getElementById("startBtn")
                 .setAttribute(
                   "style",
-                  "color:rgb(255, 49, 49); background-color: white ;"
+                  "color:rgb(236, 88, 0); background-color: white ;"
                 );
             } else {
               document
@@ -506,7 +511,7 @@
                 .getElementById("startBtn")
                 .setAttribute(
                   "style",
-                  "color:rgb(255, 49, 49); background-color: white;"
+                  "color:rgb(236, 88, 0); background-color: white;"
                 );
             } else {
               document
