@@ -121,7 +121,6 @@
 
       .timer {
         padding-top: 40%;
-
       }
 
       .minutes {
@@ -257,6 +256,10 @@
         cursor: pointer;
         box-shadow: 0 0 50px rgba(0, 0, 0, 0.24), 0 0 50px rgba(0, 0, 0, 0.19);
       }
+
+      .progress {
+        width: 400px;
+      }
     </style>
   </head>
 
@@ -274,6 +277,7 @@
     </div>
     <div class="mainDiv">
       <div class="pomodoroClock" id="pomodoroClock">
+        <progress class="progress" value="0" max="100" id="progress"></progress>
         <div class="timer">
           <p class="minutes" id="minutes">25</p>
           <p class="colon" id="colon">:</p>
@@ -289,6 +293,7 @@
     <script>
       let Timer;
       let selectedClock = "pomodoro";
+      let progress = 0;
       document.getElementById("startBtn").style.color = "rgb(80, 200, 120)";
       if (screen.width < 700) {
         document.getElementById("pomodoroBtn").className =
@@ -539,8 +544,12 @@
           document.getElementById("startBtn").innerHTML = "START";
         }
       });
-
+      let progressReset=false;
+      let percentage = 0.06666;
       function reamaingTime() {
+        progress = progress + percentage;
+        console.log();
+        document.getElementById("progress").value = progress;
         seconds = seconds - 1;
         if (seconds < 10) {
           document.getElementById("seconds").innerHTML = "0" + seconds;
@@ -551,22 +560,35 @@
           minutes = minutes - 1;
           if (minutes < 0) {
             if (breakCounts === 3) {
+              if(progressReset==="false"){
+                progress = 0;
+                progressReset=true;
+              }
               if (longBreak < 0) {
+                percentage = 0.6666;
                 breakCounts = 0;
                 shortBreak = -1;
                 longBreak = 14;
               } else {
+                percentage = 0.1111;
                 document.getElementById("minutes").innerHTML = longBreak;
                 longBreak = longBreak - 1;
               }
             } else {
+              if(progressReset==="false"){
+                  progress=0;
+                  progressReset=true;
+                }
               if (shortBreak < 0) {
+                progress = 0;
+                percentage = 0.06666;
                 shortBreak = 4;
                 minutes = 24;
                 breakCounts++;
                 console.log(breakCounts);
                 document.getElementById("minutes").innerHTML = minutes;
               } else {
+                percentage = 0.3333;
                 document.getElementById("minutes").innerHTML = shortBreak;
                 shortBreak = shortBreak - 1;
               }
