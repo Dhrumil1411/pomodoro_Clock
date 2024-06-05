@@ -169,14 +169,17 @@
       @media screen and (max-width: 700px) {
         .pomodoroBtn {
           font-size: 15px;
+          
         }
 
         .shortBreakBtn {
           font-size: 15px;
+          word-wrap: break-word;
         }
 
         .longBreakBtn {
           font-size: 15px;
+          word-wrap: break-word;
         }
 
         .startBtn {
@@ -195,49 +198,50 @@
         .colon {
           font-size: 400%;
         }
+
         .seconds {
           font-size: 400%;
         }
       }
 
       .selectedClockType {
-          border: 2px solid white;
-          text-align: center;
-          box-shadow: 0 0 50px rgb(0 0 0/ 0.2);
-          min-width: 5%;
-          height: auto;
-          border-radius: 5px;
-          font-family: monospace;
-          font-weight: bold;
-          letter-spacing: 1px;
-          margin-right: 5px;
-          font-size: 35px;
-          margin-top: 10px;
-          transition-duration: 0.5s;
-          padding: 10px;
-          background-color: whitesmoke;
-          color: black;
-        }
+        border: 2px solid white;
+        text-align: center;
+        box-shadow: 0 0 50px rgb(0 0 0/ 0.2);
+        min-width: 5%;
+        height: auto;
+        border-radius: 5px;
+        font-family: monospace;
+        font-weight: bold;
+        letter-spacing: 1px;
+        margin-right: 5px;
+        font-size: 30px;
+        margin-top: 10px;
+        transition-duration: 0.5s;
+        padding: 10px;
+        background-color: whitesmoke;
+        color: black;
+      }
 
-        .selectedClockType:hover {
-          cursor: pointer;
-          box-shadow: 0 0 50px rgba(0, 0, 0, 0.24), 0 0 50px rgba(0, 0, 0, 0.19);
-          background-color: aliceblue;
-          color: rgba(0, 0, 0, 0.7);
-        }
+      .selectedClockType:hover {
+        cursor: pointer;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.24), 0 0 50px rgba(0, 0, 0, 0.19);
+        background-color: aliceblue;
+        color: rgba(0, 0, 0, 0.7);
+      }
     </style>
   </head>
 
   <body>
     <div class="clockTypes" id="clockTypes">
       <button type="button" class="pomodoroBtn" id="pomodoroBtn">
-        pomodoro
+        Pomodoro
       </button>
       <button type="button" class="shortBreakBtn" id="shortBreakBtn">
         Short Break
       </button>
       <button type="button" class="longBreakBtn" id="longBreakBtn">
-        long Break
+        Long Break
       </button>
     </div>
     <div class="mainDiv">
@@ -259,8 +263,8 @@
       document.getElementById("startBtn").innerHTML = "\u23F5" + "START";
       document.getElementById("pomodoroBtn").addEventListener("click", () => {
         document.getElementById("pomodoroBtn").className = "selectedClockType";
-        document.getElementById("shortBreakBtn").className="shortBreakBtn";
-        document.getElementById("longBreakBtn").className="longBreakBtn"
+        document.getElementById("shortBreakBtn").className = "shortBreakBtn";
+        document.getElementById("longBreakBtn").className = "longBreakBtn";
         document.getElementById("minutes").innerHTML = "25";
         document.getElementById("seconds").innerHTML = "00";
         document.getElementById("startBtn").innerHTML = "\u23F5" + "START";
@@ -271,8 +275,9 @@
 
       document.getElementById("shortBreakBtn").addEventListener("click", () => {
         document.getElementById("pomodoroBtn").className = "pomodoroBtn";
-        document.getElementById("shortBreakBtn").className="selectedClockType";
-        document.getElementById("longBreakBtn").className="longBreakBtn"
+        document.getElementById("shortBreakBtn").className =
+          "selectedClockType";
+        document.getElementById("longBreakBtn").className = "longBreakBtn";
         document.getElementById("minutes").innerHTML = "05";
         document.getElementById("seconds").innerHTML = "00";
         document.getElementById("startBtn").innerHTML = "\u23F5" + "START";
@@ -284,8 +289,8 @@
 
       document.getElementById("longBreakBtn").addEventListener("click", () => {
         document.getElementById("pomodoroBtn").className = "pomodoroBtn";
-        document.getElementById("shortBreakBtn").className="shortBreakBtn";
-        document.getElementById("longBreakBtn").className="selectedClockType"
+        document.getElementById("shortBreakBtn").className = "shortBreakBtn";
+        document.getElementById("longBreakBtn").className = "selectedClockType";
         document.getElementById("minutes").innerHTML = "15";
         document.getElementById("seconds").innerHTML = "00";
         document.getElementById("startBtn").innerHTML = "\u23F5" + "START";
@@ -311,7 +316,7 @@
             .getElementById("startBtn")
             .setAttribute(
               "style",
-              "background-color: whitesmoke; color:black;"
+              "background-color: whitesmoke; color:black; font-size:25px;"
             );
           if (minutes < 10) {
             document.getElementById("minutes").innerHTML = "0" + minutes;
