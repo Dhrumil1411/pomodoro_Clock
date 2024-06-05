@@ -145,7 +145,6 @@
 
       .startBtn {
         border: 2px solid white;
-        text-align: center;
         box-shadow: 0 0 50px rgb(0 0 0/ 0.3);
         min-width: 5%;
         height: auto;
@@ -160,6 +159,8 @@
         padding: 10px;
         background-color: aliceblue;
         color: rgba(0, 0, 0, 0.7);
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .startBtn:hover {
@@ -281,6 +282,7 @@
         </div>
       </div>
       <div class="clockBtns" id="clockBtns">
+        
         <button type="button" class="startBtn" id="startBtn">START</button
         ><br />
       </div>
@@ -288,7 +290,6 @@
 
     <script>
       let Timer;
-      document.getElementById("startBtn").innerHTML = "\u23F5" + "START";
       document.getElementById("pomodoroBtn").addEventListener("click", () => {
         if (screen.width < 700) {
           document.getElementById("pomodoroBtn").className =
@@ -303,7 +304,7 @@
         }
         document.getElementById("minutes").innerHTML = "25";
         document.getElementById("seconds").innerHTML = "00";
-        document.getElementById("startBtn").innerHTML = "\u23F5" + "START";
+        document.getElementById("startBtn").innerHTML ="START";
         clearInterval(Timer);
         minutes = 24;
         seconds = 59;
@@ -323,7 +324,7 @@
         }
         document.getElementById("minutes").innerHTML = "05";
         document.getElementById("seconds").innerHTML = "00";
-        document.getElementById("startBtn").innerHTML = "\u23F5" + "START";
+        document.getElementById("startBtn").innerHTML =  "START";
         clearInterval(Timer);
         minutes = 4;
         shortBreak = -1;
@@ -344,7 +345,7 @@
         }
         document.getElementById("minutes").innerHTML = "15";
         document.getElementById("seconds").innerHTML = "00";
-        document.getElementById("startBtn").innerHTML = "\u23F5" + "START";
+        document.getElementById("startBtn").innerHTML = "START";
         clearInterval(Timer);
         minutes = 14;
         shortBreak = -1;
@@ -358,11 +359,11 @@
       document.getElementById("startBtn").addEventListener("click", () => {
         if (
           document.getElementById("startBtn").innerHTML ===
-          "\u23F5" + "START"
+          "START"
         ) {
           // new Notification("clock has started");
           Timer = setInterval(reamaingTime, 1000);
-          document.getElementById("startBtn").innerHTML = "\u23F8" + "PAUSE";
+          document.getElementById("startBtn").innerHTML ="PAUSE";
           if (screen.width < 700) {
             document
               .getElementById("startBtn")
@@ -450,7 +451,7 @@
           }
 
           clearInterval(Timer);
-          document.getElementById("startBtn").innerHTML = "\u23F5" + "START";
+          document.getElementById("startBtn").innerHTML ="START";
         }
       });
 
