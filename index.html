@@ -328,10 +328,11 @@
     </div>
 
     <script>
+      let timerStarted = false;
       let Timer;
       let selectedClock = "pomodoro";
       let progress = 100;
-      let borderColor="rgb(124, 255, 124)";
+      let borderColor = "rgb(124, 255, 124)";
       document.getElementById("startBtn").style.color = "rgb(80, 200, 120)";
       if (screen.width < 700) {
         document.getElementById("pomodoroBtn").className =
@@ -346,43 +347,131 @@
       }
 
       document.getElementById("pomodoroBtn").addEventListener("click", () => {
-        borderColor="rgb(124, 255, 124)";
-        progress = 100;
+        borderColor = "rgb(124, 255, 124)";
         document.body.style.backgroundColor = "rgb(80, 200, 120)";
         selectedClock = "pomodoro";
         document.getElementById("startBtn").style.color = "rgb(80, 200, 120)";
+        document
+          .getElementById("timer")
+          .setAttribute("style", "background-color:rgb(80,200,120);");
         if (screen.width < 700) {
+          if (timerStarted === true) {
+            document
+              .getElementById("timer")
+              .setAttribute(
+                "style",
+                "width:260px; height:260px; background-color:rgb(80,200,120);"
+              );
+          } else {
+            document
+              .getElementById("timer")
+              .setAttribute(
+                "style",
+                "width:230px; height:230px; background-color:rgb(80,200,120);"
+              );
+            document.getElementById("minutes").innerHTML = "25";
+            document.getElementById("seconds").innerHTML = "00";
+            clearInterval(Timer);
+            minutes = 24;
+            seconds = 59;
+            progress = 100;
+            percentage=0.06666;
+          }
           document.getElementById("pomodoroBtn").className =
             "selectedClockTypeForSmallDevice";
           document.getElementById("shortBreakBtn").className = "shortBreakBtn";
           document.getElementById("longBreakBtn").className = "longBreakBtn";
         } else {
+          if (timerStarted === true) {
+            document
+              .getElementById("timer")
+              .setAttribute(
+                "style",
+                "width:430px; height:430px; background-color:rgb(80,200,120);"
+              );
+          } else {
+            document
+              .getElementById("timer")
+              .setAttribute(
+                "style",
+                "width:380px; height:380px; background-color:rgb(80,200,120);"
+              );
+            document.getElementById("minutes").innerHTML = "25";
+            document.getElementById("seconds").innerHTML = "00";
+            clearInterval(Timer);
+            minutes = 24;
+            seconds = 59;
+            progress = 100;
+            percentage=0.06666;
+          }
           document.getElementById("pomodoroBtn").className =
             "selectedClockTypeForlargeDevice";
           document.getElementById("shortBreakBtn").className = "shortBreakBtn";
           document.getElementById("longBreakBtn").className = "longBreakBtn";
         }
-        document.getElementById("minutes").innerHTML = "25";
-        document.getElementById("seconds").innerHTML = "00";
         document.getElementById("startBtn").innerHTML = "START";
-        clearInterval(Timer);
-        minutes = 24;
-        seconds = 59;
       });
 
       document.getElementById("shortBreakBtn").addEventListener("click", () => {
-        borderColor="rgb(255,124,124)";
-        progress = 100;
-        percentage = 0.3333;
+        borderColor = "rgb(255,124,124)";
         selectedClock = "shortBreak";
         document.body.style.backgroundColor = "#FF6347";
         document.getElementById("startBtn").style.color = "#FF6347";
+        document
+          .getElementById("timer")
+          .setAttribute("style", "background-color:#FF6347;");
         if (screen.width < 700) {
+          if (timerStarted === true) {
+            document
+              .getElementById("timer")
+              .setAttribute(
+                "style",
+                "width:260px; height:260px; background-color:#FF6347;"
+              );
+          } else {
+            document
+              .getElementById("timer")
+              .setAttribute(
+                "style",
+                "width:230px; height:230px; background-color:#FF6347;"
+              );
+            document.getElementById("minutes").innerHTML = "05";
+            document.getElementById("seconds").innerHTML = "00";
+            clearInterval(Timer);
+            minutes = 4;
+            shortBreak = -1;
+            seconds = 59;
+            progress = 100;
+            percentage = 0.3333;
+          }
           document.getElementById("pomodoroBtn").className = "pomodoroBtn";
           document.getElementById("shortBreakBtn").className =
             "selectedClockTypeForSmallDevice";
           document.getElementById("longBreakBtn").className = "longBreakBtn";
         } else {
+          if (timerStarted === true) {
+            document
+              .getElementById("timer")
+              .setAttribute(
+                "style",
+                "width:430px; height:430px; background-color:#FF6347;"
+              );
+          } else {
+            document
+              .getElementById("timer")
+              .setAttribute(
+                "style",
+                "width:380px; height:380px; background-color:#FF6347;"
+              );
+            document.getElementById("minutes").innerHTML = "05";
+            document.getElementById("seconds").innerHTML = "00";
+            clearInterval(Timer);
+            minutes = 4;
+            shortBreak = -1;
+            seconds = 59;
+            progress = 100;
+            percentage = 0.3333;
+          }
           document.getElementById("pomodoroBtn").className = "pomodoroBtn";
           document.getElementById("shortBreakBtn").className =
             "selectedClockTypeForlargeDevice";
@@ -390,28 +479,70 @@
         }
         document.getElementById("pomodoroClock").className = "pomodoroClock";
         document.getElementById("startBtn").className = "startBtn";
-        document.getElementById("minutes").innerHTML = "05";
-        document.getElementById("seconds").innerHTML = "00";
+
         document.getElementById("startBtn").innerHTML = "START";
-        clearInterval(Timer);
-        minutes = 4;
-        shortBreak = -1;
-        seconds = 59;
       });
 
       document.getElementById("longBreakBtn").addEventListener("click", () => {
-        borderColor="rgb(124,124,255)";
-        progress = 100;
-        percentage = 0.1111;
+        borderColor = "rgb(124,124,255)";
         selectedClock = "longBreak";
         document.body.style.backgroundColor = "rgb(31, 81, 255)";
         document.getElementById("startBtn").style.color = "rgb(31, 81, 255)";
+        document
+          .getElementById("timer")
+          .setAttribute("style", "background-color:rgb(31, 81, 255);");
         if (screen.width < 700) {
+          if (timerStarted === true) {
+            document
+              .getElementById("timer")
+              .setAttribute(
+                "style",
+                "width:260px; height:260px; background-color:rgb(31, 81, 255);"
+              );
+          } else {
+            document
+              .getElementById("timer")
+              .setAttribute(
+                "style",
+                "width:230px; height:230px; background-color:rgb(31, 81, 255);"
+              );
+            document.getElementById("minutes").innerHTML = "15";
+            document.getElementById("seconds").innerHTML = "00";
+            clearInterval(Timer);
+            minutes = 14;
+            shortBreak = -1;
+            seconds = 59;
+            progress = 100;
+            percentage = 0.1111;
+          }
           document.getElementById("pomodoroBtn").className = "pomodoroBtn";
           document.getElementById("shortBreakBtn").className = "shortBreakBtn";
           document.getElementById("longBreakBtn").className =
             "selectedClockTypeForSmallDevice";
         } else {
+          if (timerStarted === true) {
+            document
+              .getElementById("timer")
+              .setAttribute(
+                "style",
+                "width:430px; height:430px; background-color:rgb(31, 81, 255);"
+              );
+          } else {
+            document
+              .getElementById("timer")
+              .setAttribute(
+                "style",
+                "width:380px; height:380px; background-color:rgb(31, 81, 255);"
+              );
+              clearInterval(Timer);
+            document.getElementById("minutes").innerHTML = "15";
+            document.getElementById("seconds").innerHTML = "00";  
+            minutes = 14;
+            shortBreak = -1;
+            seconds = 59;
+            progress = 100;
+            percentage = 0.1111;
+          }
           document.getElementById("pomodoroBtn").className = "pomodoroBtn";
           document.getElementById("shortBreakBtn").className = "shortBreakBtn";
           document.getElementById("longBreakBtn").className =
@@ -419,13 +550,7 @@
         }
         document.getElementById("pomodoroClock").className = "pomodoroClock";
         document.getElementById("startBtn").className = "startBtn";
-        document.getElementById("minutes").innerHTML = "15";
-        document.getElementById("seconds").innerHTML = "00";
         document.getElementById("startBtn").innerHTML = "START";
-        clearInterval(Timer);
-        minutes = 14;
-        shortBreak = -1;
-        seconds = 59;
       });
       let breakCounts = 0;
       let minutes = 24;
@@ -434,6 +559,7 @@
       let longBreak = 14;
       document.getElementById("startBtn").addEventListener("click", () => {
         if (document.getElementById("startBtn").innerHTML === "START") {
+          timerStarted = true;
           Timer = setInterval(reamaingTime, 1000);
           document.getElementById("startBtn").innerHTML = "PAUSE";
           if (screen.width < 700) {
@@ -453,10 +579,7 @@
             } else if (selectedClock === "shortBreak") {
               document
                 .getElementById("startBtn")
-                .setAttribute(
-                  "style",
-                  "color:#FF6347; font-size:30px;"
-                );
+                .setAttribute("style", "color:#FF6347; font-size:30px;");
               document
                 .getElementById("timer")
                 .setAttribute(
@@ -557,6 +680,7 @@
           }
           document.getElementById("seconds").innerHTML = seconds;
         } else {
+          timerStarted = false;
           if (screen.width < 700) {
             if (selectedClock === "pomodoro") {
               document
@@ -672,7 +796,6 @@
               .getElementById("seconds")
               .setAttribute("style", "font-size:600%;");
           }
-
           clearInterval(Timer);
           document.getElementById("startBtn").innerHTML = "START";
         }
