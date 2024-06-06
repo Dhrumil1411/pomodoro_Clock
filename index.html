@@ -309,7 +309,6 @@
         <div
           class="circular-progress"
           data-percentage="100"
-          data-progress-color="gray"
           data-bg-color="transparent"
           id="circular-progress"
         >
@@ -332,6 +331,7 @@
       let Timer;
       let selectedClock = "pomodoro";
       let progress = 100;
+      let borderColor="rgb(124, 255, 124)";
       document.getElementById("startBtn").style.color = "rgb(80, 200, 120)";
       if (screen.width < 700) {
         document.getElementById("pomodoroBtn").className =
@@ -346,6 +346,7 @@
       }
 
       document.getElementById("pomodoroBtn").addEventListener("click", () => {
+        borderColor="rgb(124, 255, 124)";
         progress = 100;
         document.body.style.backgroundColor = "rgb(80, 200, 120)";
         selectedClock = "pomodoro";
@@ -370,11 +371,12 @@
       });
 
       document.getElementById("shortBreakBtn").addEventListener("click", () => {
+        borderColor="rgb(255,124,124)";
         progress = 100;
         percentage = 0.3333;
         selectedClock = "shortBreak";
-        document.body.style.backgroundColor = "rgb(236, 88, 0)";
-        document.getElementById("startBtn").style.color = "rgb(236, 88, 0)";
+        document.body.style.backgroundColor = "#FF6347";
+        document.getElementById("startBtn").style.color = "#FF6347";
         if (screen.width < 700) {
           document.getElementById("pomodoroBtn").className = "pomodoroBtn";
           document.getElementById("shortBreakBtn").className =
@@ -398,6 +400,7 @@
       });
 
       document.getElementById("longBreakBtn").addEventListener("click", () => {
+        borderColor="rgb(124,124,255)";
         progress = 100;
         percentage = 0.1111;
         selectedClock = "longBreak";
@@ -452,13 +455,13 @@
                 .getElementById("startBtn")
                 .setAttribute(
                   "style",
-                  "color:rgb(236, 88, 0); font-size:30px;"
+                  "color:#FF6347; font-size:30px;"
                 );
               document
                 .getElementById("timer")
                 .setAttribute(
                   "style",
-                  "width:260px; height:260px; background-color:rgb(236, 88, 0);"
+                  "width:260px; height:260px; background-color:#FF6347;"
                 );
             } else {
               document
@@ -509,13 +512,13 @@
                 .getElementById("startBtn")
                 .setAttribute(
                   "style",
-                  "color:rgb(236, 88, 0); background-color: white; font-size:45px;"
+                  "color:#FF6347; background-color: white; font-size:45px;"
                 );
               document
                 .getElementById("timer")
                 .setAttribute(
                   "style",
-                  "width:430px; height:430px; background-color:rgb(236, 88, 0);"
+                  "width:430px; height:430px; background-color:#FF6347;"
                 );
             } else {
               document
@@ -573,13 +576,13 @@
                 .getElementById("startBtn")
                 .setAttribute(
                   "style",
-                  "color:rgb(236, 88, 0); background-color: white ;"
+                  "color:#FF6347; background-color: white ;"
                 );
               document
                 .getElementById("timer")
                 .setAttribute(
                   "style",
-                  "width:230px; height:230px; background-color:rgb(236, 88, 0);"
+                  "width:230px; height:230px; background-color:#FF6347;"
                 );
             } else {
               document
@@ -630,13 +633,13 @@
                 .getElementById("startBtn")
                 .setAttribute(
                   "style",
-                  "color:rgb(236, 88, 0); background-color: white;"
+                  "color:#FF6347; background-color: white;"
                 );
               document
                 .getElementById("timer")
                 .setAttribute(
                   "style",
-                  "width:380px; height:380px; background-color:rgb(236, 88, 0);"
+                  "width:380px; height:380px; background-color:#FF6347;"
                 );
             } else {
               document
@@ -681,8 +684,7 @@
         circularProgress = document.querySelectorAll(".circular-progress");
         Array.from(circularProgress).forEach((progressBar) => {
           const progressValue = progressBar.querySelector(".percentage");
-          progressColor = progressBar.getAttribute("data-progress-color");
-          progressBar.style.background = `conic-gradient(${progressColor} ${
+          progressBar.style.background = `conic-gradient(${borderColor} ${
             progress * 3.6
           }deg,${progressBar.getAttribute("data-bg-color")} 0deg)`;
           if (progress === 0) {
