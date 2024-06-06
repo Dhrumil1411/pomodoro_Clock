@@ -6,6 +6,10 @@
     <link rel="icon" type="image/x-icon" href="stopwatch.png" />
     <title>Pomodoro Clock</title>
     <style>
+      html {
+        width: 100%;
+        padding: 0;
+      }
       body {
         background-color: rgb(80, 200, 120);
         transition-duration: 0.5s;
@@ -15,12 +19,11 @@
         position: absolute;
         text-align: center;
         top: 10%;
-        width: 97%;
+        width: 99%;
         min-width: 410px;
       }
 
       .mainDiv {
-        width: 450px;
         position: absolute;
         left: 0;
         right: 0;
@@ -28,6 +31,7 @@
         margin-left: auto;
         margin-right: auto;
       }
+
       .pomodoroBtn {
         border: 2px;
         text-align: center;
@@ -109,10 +113,10 @@
         margin-left: auto;
         margin-right: auto;
         transition-duration: 0.5s;
-        background-color: rgba(255, 255, 255, 0.1);
         color: white;
         font-family: monospace;
         margin-top: 5%;
+        background-color: transparent;
       }
 
       .pomodoroClock:hover {
@@ -120,7 +124,12 @@
       }
 
       .timer {
-        padding-top: 40%;
+        width: 380px;
+        height: 380px;
+        border-radius: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        transition-duration: 0.5s;
       }
 
       .minutes {
@@ -157,7 +166,6 @@
         letter-spacing: 1px;
         margin-right: 5px;
         font-size: 35px;
-        margin-top: 20px;
         transition-duration: 0.5s;
         padding: 10px;
         background-color: white;
@@ -168,6 +176,17 @@
       .startBtn:hover {
         cursor: pointer;
         box-shadow: 0 0 50px rgba(0, 0, 0, 0.24), 0 0 50px rgba(0, 0, 0, 0.19);
+      }
+
+      .circular-progress {
+        width: 400px;
+        height: 390px;
+        border-radius: 50%;
+        z-index: 1;
+        transition-duration: 0.5s;
+        margin-right: auto;
+        margin-left: auto;
+        padding-top: 10px;
       }
 
       @media screen and (max-width: 700px) {
@@ -192,6 +211,16 @@
         .pomodoroClock {
           height: 250px;
           width: 250px;
+        }
+
+        .circular-progress {
+          width: 250px;
+          height: 240px;
+        }
+
+        .timer {
+          width: 230px;
+          height: 230px;
         }
 
         .minutes {
@@ -250,15 +279,15 @@
         padding: 10px;
         background-color: rgba(0, 0, 0, 0.13);
         color: white;
+        z-index: 2;
       }
 
       .selectedClockTypeForlargeDevice:hover {
         cursor: pointer;
         box-shadow: 0 0 50px rgba(0, 0, 0, 0.24), 0 0 50px rgba(0, 0, 0, 0.19);
       }
-
-      .progress {
-        width: 400px;
+      .watch {
+        padding-top: 35%;
       }
     </style>
   </head>
@@ -272,16 +301,26 @@
         Short Break
       </button>
       <button type="button" class="longBreakBtn" id="longBreakBtn">
-        Long Break
-      </button>
+        Long Break</button
+      ><br />
     </div>
+
     <div class="mainDiv">
       <div class="pomodoroClock" id="pomodoroClock">
-        <progress class="progress" value="0" max="100" id="progress"></progress>
-        <div class="timer">
-          <p class="minutes" id="minutes">25</p>
-          <p class="colon" id="colon">:</p>
-          <p class="seconds" id="seconds">00</p>
+        <div
+          class="circular-progress"
+          data-percentage="100"
+          data-progress-color="gray"
+          data-bg-color="transparent"
+          id="circular-progress"
+        >
+          <div class="timer" id="timer">
+            <div class="watch">
+              <p class="minutes" id="minutes">25</p>
+              <p class="colon" id="colon">:</p>
+              <p class="seconds" id="seconds">00</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="clockBtns" id="clockBtns">
@@ -293,7 +332,7 @@
     <script>
       let Timer;
       let selectedClock = "pomodoro";
-      let progress = 0;
+      let progress = 100;
       document.getElementById("startBtn").style.color = "rgb(80, 200, 120)";
       if (screen.width < 700) {
         document.getElementById("pomodoroBtn").className =
@@ -308,6 +347,7 @@
       }
 
       document.getElementById("pomodoroBtn").addEventListener("click", () => {
+        progress = 100;
         document.body.style.backgroundColor = "rgb(80, 200, 120)";
         selectedClock = "pomodoro";
         document.getElementById("startBtn").style.color = "rgb(80, 200, 120)";
@@ -331,6 +371,8 @@
       });
 
       document.getElementById("shortBreakBtn").addEventListener("click", () => {
+        progress = 100;
+        percentage = 0.3333;
         selectedClock = "shortBreak";
         document.body.style.backgroundColor = "rgb(236, 88, 0)";
         document.getElementById("startBtn").style.color = "rgb(236, 88, 0)";
@@ -357,6 +399,8 @@
       });
 
       document.getElementById("longBreakBtn").addEventListener("click", () => {
+        progress = 100;
+        percentage = 0.1111;
         selectedClock = "longBreak";
         document.body.style.backgroundColor = "rgb(31, 81, 255)";
         document.getElementById("startBtn").style.color = "rgb(31, 81, 255)";
@@ -398,12 +442,24 @@
                   "style",
                   "color:rgb(80, 200, 120); font-size:30px;"
                 );
+              document
+                .getElementById("timer")
+                .setAttribute(
+                  "style",
+                  "width:260px; height:260px; background-color:rgb(80, 200, 120);"
+                );
             } else if (selectedClock === "shortBreak") {
               document
                 .getElementById("startBtn")
                 .setAttribute(
                   "style",
                   "color:rgb(236, 88, 0); font-size:30px;"
+                );
+              document
+                .getElementById("timer")
+                .setAttribute(
+                  "style",
+                  "width:260px; height:260px; background-color:rgb(236, 88, 0);"
                 );
             } else {
               document
@@ -412,10 +468,20 @@
                   "style",
                   "color:rgb(31, 81, 255); font-size:30px;"
                 );
+              document
+                .getElementById("timer")
+                .setAttribute(
+                  "style",
+                  "width:260px; height:260px; background-color:rgb(31, 81, 255);"
+                );
             }
             document
               .getElementById("pomodoroClock")
               .setAttribute("style", "width:280px; height:280px;");
+            document
+              .getElementById("circular-progress")
+              .setAttribute("style", "width:280px; height:270px;");
+
             document
               .getElementById("minutes")
               .setAttribute("style", "font-size:450%;");
@@ -433,12 +499,24 @@
                   "style",
                   "color:rgb(80, 200, 120); background-color: white; font-size:45px;"
                 );
+              document
+                .getElementById("timer")
+                .setAttribute(
+                  "style",
+                  "width:430px; height:430px; background-color:rgb(80, 200, 120);"
+                );
             } else if (selectedClock === "shortBreak") {
               document
                 .getElementById("startBtn")
                 .setAttribute(
                   "style",
                   "color:rgb(236, 88, 0); background-color: white; font-size:45px;"
+                );
+              document
+                .getElementById("timer")
+                .setAttribute(
+                  "style",
+                  "width:430px; height:430px; background-color:rgb(236, 88, 0);"
                 );
             } else {
               document
@@ -447,10 +525,19 @@
                   "style",
                   "color:rgb(31, 81, 255); background-color: white; font-size:45px;"
                 );
+              document
+                .getElementById("timer")
+                .setAttribute(
+                  "style",
+                  "width:430px; height:430px; background-color:rgb(31, 81, 255);"
+                );
             }
             document
               .getElementById("pomodoroClock")
               .setAttribute("style", "width:450px; height:450px;");
+            document
+              .getElementById("circular-progress")
+              .setAttribute("style", "width:450px; height:440px;");
             document
               .getElementById("minutes")
               .setAttribute("style", "font-size:700%;");
@@ -476,12 +563,24 @@
                   "style",
                   "color:rgb(80, 200, 120); background-color: white ;"
                 );
+              document
+                .getElementById("timer")
+                .setAttribute(
+                  "style",
+                  "width:230px; height:230px; background-color:rgb(80, 200, 120);"
+                );
             } else if (selectedClock === "shortBreak") {
               document
                 .getElementById("startBtn")
                 .setAttribute(
                   "style",
                   "color:rgb(236, 88, 0); background-color: white ;"
+                );
+              document
+                .getElementById("timer")
+                .setAttribute(
+                  "style",
+                  "width:230px; height:230px; background-color:rgb(236, 88, 0);"
                 );
             } else {
               document
@@ -490,10 +589,20 @@
                   "style",
                   "color:rgb(31, 81, 255); background-color: white ;"
                 );
+              document
+                .getElementById("timer")
+                .setAttribute(
+                  "style",
+                  "width:230px; height:230px; background-color:rgb(31, 81, 255);"
+                );
             }
             document
               .getElementById("pomodoroClock")
               .setAttribute("style", "width:250px; height:250px;");
+            document
+              .getElementById("circular-progress")
+              .setAttribute("style", "width:250px; height:240px;");
+
             document
               .getElementById("minutes")
               .setAttribute("style", "font-size:400%;");
@@ -511,12 +620,24 @@
                   "style",
                   "color:rgb(80, 200, 120); background-color: white;"
                 );
+              document
+                .getElementById("timer")
+                .setAttribute(
+                  "style",
+                  "width:380px; height:380px; background-color:rgb(80, 200, 120);"
+                );
             } else if (selectedClock === "shortBreak") {
               document
                 .getElementById("startBtn")
                 .setAttribute(
                   "style",
                   "color:rgb(236, 88, 0); background-color: white;"
+                );
+              document
+                .getElementById("timer")
+                .setAttribute(
+                  "style",
+                  "width:380px; height:380px; background-color:rgb(236, 88, 0);"
                 );
             } else {
               document
@@ -525,10 +646,20 @@
                   "style",
                   "color:rgb(31, 81, 255); background-color: white;"
                 );
+              document
+                .getElementById("timer")
+                .setAttribute(
+                  "style",
+                  "width:380px; height:380px; background-color:rgb(31, 81, 255);"
+                );
             }
             document
               .getElementById("pomodoroClock")
               .setAttribute("style", "width:400px; height:400px;");
+            document
+              .getElementById("circular-progress")
+              .setAttribute("style", "width:400px; height:390px;");
+
             document
               .getElementById("minutes")
               .setAttribute("style", "font-size:600%;");
@@ -544,12 +675,22 @@
           document.getElementById("startBtn").innerHTML = "START";
         }
       });
-      let progressReset=false;
+      let progressReset = false;
       let percentage = 0.06666;
       function reamaingTime() {
-        progress = progress + percentage;
-        console.log();
-        document.getElementById("progress").value = progress;
+        progress = progress - percentage;
+        circularProgress = document.querySelectorAll(".circular-progress");
+        Array.from(circularProgress).forEach((progressBar) => {
+          const progressValue = progressBar.querySelector(".percentage");
+          progressColor = progressBar.getAttribute("data-progress-color");
+          progressBar.style.background = `conic-gradient(${progressColor} ${
+            progress * 3.6
+          }deg,${progressBar.getAttribute("data-bg-color")} 0deg)`;
+          if (progress === 0) {
+            clearInterval(Timer);
+          }
+        });
+
         seconds = seconds - 1;
         if (seconds < 10) {
           document.getElementById("seconds").innerHTML = "0" + seconds;
@@ -560,28 +701,30 @@
           minutes = minutes - 1;
           if (minutes < 0) {
             if (breakCounts === 3) {
-              if(progressReset==="false"){
-                progress = 0;
-                progressReset=true;
+              if (progressReset === false) {
+                progress = 100;
+                progressReset = true;
               }
               if (longBreak < 0) {
                 percentage = 0.6666;
                 breakCounts = 0;
                 shortBreak = -1;
                 longBreak = 14;
+                progressReset = false;
               } else {
                 percentage = 0.1111;
                 document.getElementById("minutes").innerHTML = longBreak;
                 longBreak = longBreak - 1;
               }
             } else {
-              if(progressReset==="false"){
-                  progress=0;
-                  progressReset=true;
-                }
+              if (progressReset === false) {
+                progress = 100;
+                progressReset = true;
+              }
               if (shortBreak < 0) {
-                progress = 0;
+                progressReset = false;
                 percentage = 0.06666;
+                progress = 0;
                 shortBreak = 4;
                 minutes = 24;
                 breakCounts++;
@@ -604,6 +747,7 @@
           document.getElementById("seconds").innerHTML = "60";
         }
       }
+      let startValue = 0;
     </script>
   </body>
 </html>
