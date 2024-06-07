@@ -10,6 +10,7 @@
         width: 100%;
         padding: 0;
       }
+
       body {
         background-color: rgb(80, 200, 120);
         transition-duration: 0.5s;
@@ -225,6 +226,7 @@
         .minutes {
           font-size: 400%;
         }
+
         .mainDiv {
           width: 390px;
           margin-top: 23%;
@@ -294,6 +296,7 @@
         cursor: pointer;
         box-shadow: 0 0 50px rgba(0, 0, 0, 0.24), 0 0 50px rgba(0, 0, 0, 0.19);
       }
+
       .watch {
         padding-top: 35%;
       }
@@ -398,7 +401,7 @@
                 "style",
                 "width:410px; height:410px; background-color:rgb(80,200,120);"
               );
-            document.getElementById("startBtn").innerHTML = "PAUSE";
+            document.getElementById("startBtn").innerHTML = "PAUSE"; 
           } else {
             document
               .getElementById("timer")
@@ -436,7 +439,7 @@
                 "style",
                 "width:260px; height:260px; background-color:#FF6347;"
               );
-              document.getElementById("startBtn").innerHTML = "PAUSE";
+            document.getElementById("startBtn").innerHTML = "PAUSE";
           } else {
             document
               .getElementById("timer")
@@ -464,7 +467,6 @@
                 "style",
                 "width:410px; height:410px; background-color:#FF6347;"
               );
-
             document.getElementById("startBtn").innerHTML = "PAUSE";
           } else {
             document
@@ -506,7 +508,7 @@
                 "style",
                 "width:260px; height:260px; background-color:rgb(31, 81, 255);"
               );
-              document.getElementById("startBtn").innerHTML = "PAUSE";
+            document.getElementById("startBtn").innerHTML = "PAUSE";
           } else {
             document
               .getElementById("timer")
@@ -534,7 +536,7 @@
                 "style",
                 "width:410px; height:410px; background-color:rgb(31, 81, 255);"
               );
-              document.getElementById("startBtn").innerHTML = "PAUSE";
+            document.getElementById("startBtn").innerHTML = "PAUSE";
           } else {
             document
               .getElementById("timer")
@@ -568,7 +570,7 @@
       document.getElementById("startBtn").addEventListener("click", () => {
         if (document.getElementById("startBtn").innerHTML === "START") {
           timerStarted = true;
-          Timer = setInterval(reamaingTime, 10);
+          Timer = setInterval(reamaingTime, 1000);
           document.getElementById("startBtn").innerHTML = "PAUSE";
           if (screen.width < 700) {
             if (selectedClock === "pomodoro") {
